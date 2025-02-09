@@ -1,0 +1,10 @@
+git add <file> => include the file in the next commit that will be done
+
+git commit -m "Message" => Updating and posting my progress to git (With a useful/descriptive message)
+
+git remote add <name> <url>
+=> adds a reference to the remote repo
+
+Comment Git push will put it remotely on github 
+
+git push --set-upstream (name) master
