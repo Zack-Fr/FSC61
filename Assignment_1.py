@@ -7,16 +7,18 @@
 age = int(input("How old are you?"))
 
 if age >= 18:
-    print("Your ticket price is 5$")
+    price = 5 
 elif age >=25:
-    print("Your ticket number is 10$!")
+    price = 10
 elif age >= 60:
-    print("Your ticket price is 50$!")
+    price = 50
 elif age >= 35: 
-    print("Your ticket price is 25$!")
+    price = 25
 else:
-    print("You are not eligible to have a ticket!")
+    price = 0
+    print("You are not eligible for a ticket")
 
+print(f"The ticket price is $ {price}")
 
 #Exercise 2
 #Write a Python program that asks the user to enter a number and checks whether it is even or odd.
