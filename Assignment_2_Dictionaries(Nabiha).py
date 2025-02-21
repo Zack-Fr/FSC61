@@ -1,6 +1,5 @@
 def InitCredentials():
-
-
+    
     NewUser = {
         "salary" : MonthlySalary,
         "month" :CurrentMonth,
