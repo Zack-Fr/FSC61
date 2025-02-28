@@ -23,8 +23,8 @@ class Vehicle:
     def setRental(self , newRental):
         self.__rentalPrice = newRental
 
-    def totalRentalCost(self, rentalDays):
-        return self.__rentalPrice * rentalDays
+    # def totalRentalCost(self, rentalDays):
+    #     return self.__rentalPrice * rentalDays
     def display_info(self):
         print (f"Car Brand:{self.brand}")  
         print (f"Car Model:{self.model}")
@@ -37,6 +37,7 @@ class Car(Vehicle):
         self.seatCapacity = seatCapacity
         super().__init__(brand, model, year)
     def display_info(self):
+        super().display_info()
         print (f"Car seats capacity:{self.seatCapacity}")
         #print (f"car Rental Price:{veh1.getRental}")
 class Bike(Vehicle):
@@ -44,8 +45,11 @@ class Bike(Vehicle):
         self.engineCapacity = engineCapacity
         super().__init__(brand, model, year)
     def display_info(self):
-        print (f"Bike seats capacity:{self.engineCapacity}")
-        #print (f"car Rental Price:{veh1.getRental}")
+        super().display_info()
+        print (f"Bike engine capacity:{self.engineCapacity}cc")
+
+def show_vehicle_info(vehicle):
+    vehicle.display_info()
 def createAccount():
     name = input("Enter your name that will be used in your account: ")
     password = input("Enter your password: ")
@@ -59,12 +63,29 @@ def createAccount():
 def createOrder():
     date = input("Add the current date: ")
     
-    orderNumber = date
-    print(f"Created an order number {orderNumber}" )
+    print("Choose a vehicle:")
+    print("1. Car - Toyota Corolla")
+    print("2. Bike - Yamaha")
+    
+    vehicle_choice = int(input("Enter your choice (1 or 2): "))
     
     rentalDays = input("how many days would you like to rent our services for? ")
     
-    order = date, orderNumber, rentalDays, account
+    if vehicle_choice == 1:
+        selected_vehicle = car1
+    elif vehicle_choice == 2:
+        selected_vehicle = bike1
+    else:
+        print("Invalid choice. Defaulting to Car.")
+        selected_vehicle = car1
+        
+    totalRental = selected_vehicle.getRental() * int(rentalDays)
+    orderNumber = date
+    print(f"Created an order number {orderNumber}" )
+    print(f"Total Rental Cost for {selected_vehicle.brand} {selected_vehicle.model}: ${totalRental}")
+    
+    
+    order = (date, orderNumber, rentalDays, account , totalRental)
     orderList.append(order)
     
     return order
@@ -81,8 +102,11 @@ def prompt():
     
     return action
 
-veh1 = Car("Toyota", "Corolla", 2020, 5)
-veh2 = Bike("Toyota", "Yamaha", 2025, 1200)
+car1 = Car("Toyota", "Corolla", 2020, 5)
+car1.setRental(50)
+
+bike1 = Bike("Toyota", "Yamaha", 2025, 1200)
+bike1.setRental(50)
 
 orderList = []    
 action = ""
@@ -97,5 +121,6 @@ while action != 5:
         orderNumber = createOrder()
         print(orderList)
     elif action == 2:
-        veh1.display_info()
-        veh2.display_info()
+        car1.display_info()
+        bike1.display_info()
+        
