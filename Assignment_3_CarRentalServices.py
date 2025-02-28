@@ -51,13 +51,14 @@ class Bike(Vehicle):
 def show_vehicle_info(vehicle):
     vehicle.display_info()
 def createAccount():
+    global account
     name = input("Enter your name that will be used in your account: ")
     password = input("Enter your password: ")
     user = name
     
     account = User(name,password,user)
     
-    print(f"Created an account = {user}")
+    print(f"Account created successfully! Welcome, {account.user}.")
     
     return account
 def createOrder():
@@ -85,7 +86,7 @@ def createOrder():
     print(f"Total Rental Cost for {selected_vehicle.brand} {selected_vehicle.model}: ${totalRental}")
     
     
-    order = (date, orderNumber, rentalDays, account , totalRental)
+    order = (date, orderNumber, rentalDays, account.user , totalRental)
     orderList.append(order)
     
     return order
@@ -94,13 +95,16 @@ def prompt():
     print("======================")
     print("Welcome to SPEED rental services!")
     print("======================")
-    print("Enter 0 to create an account")
+    action = input("Do you want to create an account? (yes/no): ")
+    
+    if action == "yes":
+        createAccount()
+        
     print("Enter 1 to create a new request order using a guest account")
     print("Enter 2 to view available vehicles")
-    print("Enter 5 to exit")
-    action = int(input("Choice: "))
+    print("Enter 3 to exit")
     
-    return action
+    return int(input("Choice: "))
 
 car1 = Car("Toyota", "Corolla", 2020, 5)
 car1.setRental(50)
@@ -110,14 +114,12 @@ bike1.setRental(50)
 
 orderList = []    
 action = ""
-account = "guest"
+account = User("Guest", "", "guest")
 
-while action != 5:
+while action != 3:
     action = prompt()
     
-    if action == 0:
-        account = createAccount()
-    elif action == 1:
+    if action == 1:
         orderNumber = createOrder()
         print(orderList)
     elif action == 2:
